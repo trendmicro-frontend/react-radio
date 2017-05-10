@@ -35,28 +35,28 @@ class App extends React.Component {
                             <div className="col-md-6">
                                 <h6>HTML Radio Button</h6>
                                 <label className="radio">
-                                    <input type="radio" name="optionsRadios" />
+                                    <input type="radio" />
                                     Normal
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name="optionsRadios" checked />
+                                    <input type="radio" defaultChecked />
                                     Checked
                                 </label>
                                 <label className="radio disabled">
-                                    <input type="radio" name="optionsRadios" checked disabled />
+                                    <input type="radio" defaultChecked disabled />
                                     Checked disabled
                                 </label>
                                 <label className="radio disabled">
-                                    <input type="radio" name="optionsRadios" disabled />
+                                    <input type="radio" disabled />
                                     Disabled
                                 </label>
                             </div>
                             <div className="col-md-6">
                                 <h6>React Radio Button</h6>
                                 <RadioButton className="radio" text="Normal" />
-                                <RadioButton className="radio" text="Checked" checked={true} />
-                                <RadioButton className="radio" text="Checked disabled" checked={true} disabled={true} />
-                                <RadioButton className="radio" text="Disabled" disabled={true} />
+                                <RadioButton className="radio" text="Checked" defaultChecked />
+                                <RadioButton className="radio" text="Checked disabled" defaultChecked disabled />
+                                <RadioButton className="radio" text="Disabled" disabled />
                             </div>
                         </Section>
                     </div>
@@ -80,7 +80,7 @@ class App extends React.Component {
                                     Disabled label
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name="default" checked />
+                                    <input type="radio" name="default" defaultChecked />
                                     Checked label
                                     <div>
                                         <div>Sed posuere consecteyur est at lobortus. Aenean eu leo quam.</div>
@@ -90,10 +90,10 @@ class App extends React.Component {
                             </div>
                             <div className="col-md-6">
                                 <h6>React Radio Button</h6>
-                                <RadioButton className="radio" text="Normal label one" />
-                                <RadioButton className="radio" text="Normal label two" />
-                                <RadioButton className="radio" text="Disabled label" disabled={true} />
-                                <RadioButton className="radio" text="Checked label" checked={true}>
+                                <RadioButton className="radio" name="default2" text="Normal label one" />
+                                <RadioButton className="radio" name="default2" text="Normal label two" />
+                                <RadioButton className="radio" name="default2" text="Disabled label" disabled />
+                                <RadioButton className="radio" name="default2" text="Checked label" defaultChecked>
                                     <div>
                                         <div>Sed posuere consecteyur est at lobortus. Aenean eu leo quam.</div>
                                         <div>Pellentesque omare sem lacinia quam venenatis vestibulum.</div>
@@ -117,14 +117,14 @@ class App extends React.Component {
                                     Disabled label
                                 </label>
                                 <label className="radio-inline">
-                                    <input type="radio" name="inline" checked />
+                                    <input type="radio" name="inline" defaultChecked />
                                     Checked label
                                 </label>
                             </div>
                             <div className="col-md-6">
-                                <RadioButton className="radio-inline" text="Normal label" />
-                                <RadioButton className="radio-inline" text="Disabled label" disabled={true} />
-                                <RadioButton className="radio-inline" text="Checked label" checked={true} />
+                                <RadioButton className="radio-inline" name="inline2" text="Normal label" />
+                                <RadioButton className="radio-inline" name="inline2" text="Disabled label" disabled />
+                                <RadioButton className="radio-inline" name="inline2" text="Checked label" defaultChecked />
                             </div>
                         </Section>
                     </div>

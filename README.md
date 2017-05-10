@@ -26,7 +26,7 @@ Demo: https://trendmicro-frontend.github.io/react-radio-button
 ## Usage
 
 ```js
-<RadioButton className="radio-inline" text="Disabled label" disabled={true} checked={true} />
+<RadioButton className="radio-inline" text="Disabled label" disabled defaultChecked />
 ```
 
 
@@ -34,7 +34,7 @@ Demo: https://trendmicro-frontend.github.io/react-radio-button
 
 ### Properties
 
-Name | Type | Default | Description 
+Name | Type | Default | Description
 :--- | :--- | :------ | :----------
 
 ## License
