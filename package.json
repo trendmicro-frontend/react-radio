@@ -1,6 +1,6 @@
 {
   "name": "@trendmicro/react-radio-button",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Trend Micro Components: React Radio Button",
   "main": "lib/index.js",
   "files": [
