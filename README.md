@@ -71,7 +71,7 @@ labelClassName | Object | | Customized class name for the text label.
 labelStyle | Object | | Customized style for the text label.
 inputClassName | Object | | Customized class name for the radio button.
 inputStyle | Object | | Customized style for the radio button.
-className | object | | Customized class name for the label element.
+className | Object | | Customized class name for the label element.
 style | Object | | Customized style for the label element.
 disabled | Boolean | false | If true, the radio button shown as disabled and cannot be modified.
 checked | Boolean | | The checked state of the radio button.
