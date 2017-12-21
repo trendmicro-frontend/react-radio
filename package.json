@@ -1,6 +1,6 @@
 {
   "name": "@trendmicro/react-radio-button",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Trend Micro Components: React Radio Button",
   "main": "lib/index.js",
   "files": [
@@ -78,6 +78,7 @@
     "react": "~16.2.0",
     "react-dom": "~16.2.0",
     "style-loader": "~0.19.1",
+    "styled-components": "~2.3.3",
     "stylint": "~1.5.9",
     "stylint-loader": "~1.0.0",
     "stylus-loader": "~3.0.1",
