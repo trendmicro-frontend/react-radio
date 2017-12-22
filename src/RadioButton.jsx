@@ -3,14 +3,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.styl';
 
+const noop = () => {};
+
 class RadioButton extends PureComponent {
     static propTypes = {
         label: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.node
         ]),
-        labelClassName: PropTypes.object,
-        labelStyle: PropTypes.object,
         inputClassName: PropTypes.object,
         inputStyle: PropTypes.object,
         disabled: PropTypes.bool,
@@ -34,11 +34,10 @@ class RadioButton extends PureComponent {
     render() {
         const {
             label,
-            labelClassName,
-            labelStyle,
             inputClassName,
             inputStyle,
             disabled,
+            onChange = noop,
 
             // Default props
             className,
@@ -68,9 +67,10 @@ class RadioButton extends PureComponent {
                         styles.inputRadio
                     )}
                     style={inputStyle}
+                    onChange={onChange}
                 />
                 <i className={styles.controlIndicator} />
-                {label ? <span className={cx(styles.textLabel, labelClassName)} style={labelStyle}>{label}</span> : null}
+                {label ? <span className={styles.textLabel}>{label}</span> : null}
                 {children}
             </label>
         );

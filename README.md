@@ -66,13 +66,11 @@ The label prop is optional, you can use children to pass through the component.
 Name | Type | Default | Description
 :--- | :--- | :------ | :----------
 children | any | | Children to pass through the component.
+className | Object | | Customized class name for the component.
+style | Object | | Customized style for the component.
 label | Node or String | | Text label to attach next to the radio button.
-labelClassName | Object | | Customized class name for the text label.
-labelStyle | Object | | Customized style for the text label.
 inputClassName | Object | | Customized class name for the radio button.
 inputStyle | Object | | Customized style for the radio button.
-className | Object | | Customized class name for the label element.
-style | Object | | Customized style for the label element.
 disabled | Boolean | false | If true, the radio button shown as disabled and cannot be modified.
 checked | Boolean | | The checked state of the radio button.
 defaultChecked | Boolean | | The default checked state of the radio button.
