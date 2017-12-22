@@ -14,8 +14,7 @@
     "clean": "rm -f {lib,dist}/*",
     "cleancss": "cleancss -o dist/react-radio-button.min.css dist/react-radio-button.css",
     "demo": "http-server -p 8000 docs/",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src",
+    "lint": "eslint ./src ./test",
     "test": "tap test/*.js --node-arg=--require --node-arg=babel-register --node-arg=--require --node-arg=babel-polyfill",
     "coveralls": "tap test/*.js --coverage --coverage-report=text-lcov --nyc-arg=--require --nyc-arg=babel-register --nyc-arg=--require --nyc-arg=babel-polyfill | coveralls",
     "dev": "cd examples; webpack-dev-server --hot --inline --host 0.0.0.0 --port 8000 --content-base ../docs"
