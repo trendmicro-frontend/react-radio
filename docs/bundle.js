@@ -23775,6 +23775,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var noop = function noop() {};
+
 var RadioButton = (_temp2 = _class = function (_PureComponent) {
     _inherits(RadioButton, _PureComponent);
 
@@ -23799,15 +23801,15 @@ var RadioButton = (_temp2 = _class = function (_PureComponent) {
 
             var _props = this.props,
                 label = _props.label,
-                labelClassName = _props.labelClassName,
-                labelStyle = _props.labelStyle,
                 inputClassName = _props.inputClassName,
                 inputStyle = _props.inputStyle,
                 disabled = _props.disabled,
+                _props$onChange = _props.onChange,
+                onChange = _props$onChange === undefined ? noop : _props$onChange,
                 className = _props.className,
                 style = _props.style,
                 children = _props.children,
-                props = _objectWithoutProperties(_props, ['label', 'labelClassName', 'labelStyle', 'inputClassName', 'inputStyle', 'disabled', 'className', 'style', 'children']);
+                props = _objectWithoutProperties(_props, ['label', 'inputClassName', 'inputStyle', 'disabled', 'onChange', 'className', 'style', 'children']);
 
             return _react2.default.createElement(
                 'label',
@@ -23822,12 +23824,13 @@ var RadioButton = (_temp2 = _class = function (_PureComponent) {
                     type: 'radio',
                     disabled: disabled,
                     className: (0, _classnames2.default)(inputClassName, _index2.default.inputRadio),
-                    style: inputStyle
+                    style: inputStyle,
+                    onChange: onChange
                 })),
                 _react2.default.createElement('i', { className: _index2.default.controlIndicator }),
                 label ? _react2.default.createElement(
                     'span',
-                    { className: (0, _classnames2.default)(_index2.default.textLabel, labelClassName), style: labelStyle },
+                    { className: _index2.default.textLabel },
                     label
                 ) : null,
                 children
@@ -23846,8 +23849,6 @@ var RadioButton = (_temp2 = _class = function (_PureComponent) {
     return RadioButton;
 }(_react.PureComponent), _class.propTypes = {
     label: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.node]),
-    labelClassName: _propTypes2.default.object,
-    labelStyle: _propTypes2.default.object,
     inputClassName: _propTypes2.default.object,
     inputStyle: _propTypes2.default.object,
     disabled: _propTypes2.default.bool,
@@ -24722,4 +24723,4 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?f409e3d5c4cf38e1d81a
+//# sourceMappingURL=bundle.js.map?8dec45c95a25e6de7c60
