@@ -110,12 +110,14 @@ test('simulates change event', (t) => {
     test('RadioGroup', (t) => {
         const spy = sinon.spy();
         const wrapper = mount((
-            <RadioGroup onChange={spy}>
+            <RadioGroup name="name" onChange={spy}>
                 <RadioButton value="value" />
             </RadioGroup>
         ));
         wrapper.find('input').simulate('change');
+
         t.ok(spy.calledOnce);
+        t.equal(spy.getCall(0).args[0], 'value');
         t.end();
     });
 
@@ -126,7 +128,7 @@ test('prevents onChange propagation', (t) => {
     test('RadioButton', (t) => {
         const spy = sinon.spy();
         const wrapper = mount((
-            <RadioButton id="radio" value="myvalue" onChange={spy}>
+            <RadioButton id="radio" value="value" onChange={spy}>
                 <input
                     type="text"
                     id="name"
@@ -146,7 +148,7 @@ test('prevents onChange propagation', (t) => {
         const spy = sinon.spy();
         const wrapper = mount((
             <RadioGroup onChange={spy}>
-                <RadioButton id="radio" value="myvalue">
+                <RadioButton id="radio" value="value">
                     <input
                         type="text"
                         id="name"
