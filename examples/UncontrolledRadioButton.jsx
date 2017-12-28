@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Section from './Section';
-import RadioButton from '../src';
+import { RadioButton } from '../src';
 
 const LabelText = styled.span`
     display: inline-block;

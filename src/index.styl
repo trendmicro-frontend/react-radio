@@ -1,4 +1,20 @@
-/*== Customize Radio button ==*/
+@import "reset-context";
+
+.control-radio {
+    reset-context();
+
+    cursor: pointer;
+
+    &.disabled {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+}
+
+.control-radio + .control-radio {
+    margin-left: 16px;
+}
+
 .input-radio {
     display: none;
 }
@@ -49,9 +65,3 @@
         background-color: #dddddd;
     }
 }
-.control-radio.disabled {
-    opacity: .4;
-    cursor: not-allowed;
-}
-
-

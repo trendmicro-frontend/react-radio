@@ -1,3 +1,2 @@
-import RadioButton from './RadioButton';
-
-module.exports = RadioButton;
+export RadioButton from './RadioButton';
+export RadioGroup from './RadioGroup';

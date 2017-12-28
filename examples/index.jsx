@@ -3,29 +3,29 @@ import '@trendmicro/react-buttons/dist/react-buttons.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './Navbar';
-import Uncontrolled from './Uncontrolled';
-import Controlled from './Controlled';
+import UncontrolledRadioButton from './UncontrolledRadioButton';
+import ControlledRadioButton from './ControlledRadioButton';
+import RadioGroup from './RadioGroup';
 
-class App extends React.Component {
-    render() {
-        const name = 'React Radio Button';
-        const url = 'https://github.com/trendmicro-frontend/react-radio-button';
+const name = 'React Radio';
+const url = 'https://github.com/trendmicro-frontend/react-radio';
 
-        return (
-            <div>
-                <Navbar name={name} url={url} />
-                <div className="container-fluid" style={{ padding: '20px 20px 0' }}>
-                    <div className="col-lg-6 col-md-12">
-                        <Uncontrolled />
-                    </div>
-                    <div className="col-lg-6 col-md-12">
-                        <Controlled />
-                    </div>
-                </div>
+const App = () => (
+    <div>
+        <Navbar name={name} url={url} />
+        <div className="container-fluid" style={{ padding: '20px 20px 0' }}>
+            <div className="col-lg-6 col-md-12">
+                <UncontrolledRadioButton />
             </div>
-        );
-    }
-}
+            <div className="col-lg-6 col-md-12">
+                <ControlledRadioButton />
+            </div>
+            <div className="col-lg-6 col-md-12">
+                <RadioGroup />
+            </div>
+        </div>
+    </div>
+);
 
 ReactDOM.render(
     <App />,

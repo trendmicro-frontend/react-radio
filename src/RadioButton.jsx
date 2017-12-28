@@ -15,7 +15,8 @@ class RadioButton extends PureComponent {
         inputStyle: PropTypes.object,
         disabled: PropTypes.bool,
         checked: PropTypes.bool,
-        defaultChecked: PropTypes.bool
+        defaultChecked: PropTypes.bool,
+        onChange: PropTypes.func
     };
 
     static defaultProps = {
