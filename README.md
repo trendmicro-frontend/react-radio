@@ -90,21 +90,37 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
 
 ```jsx
 <RadioGroup
+    value={this.state.value}
     onChange={(value, event) => {
         if (typeof value === 'object') {
-            // Prevent onChange propagation in one place
+            // You can prevent onChange propagation in one place
             return;
         }
+
+        this.setState({ value: value });
     }}
 >
-    <RadioButton>
-        <input
-            type="text"
-            onChange={(event) => {
-                // Prevent onChange propagation
-                event.stopPropagation();
-            }}
-        />
+    <RadioButton label="First option" value="one">
+        <div style={{ marginLeft: 22 }}>
+            <input
+                type="text"
+                onChange={(event) => {
+                    // Prevent onChange propagation
+                    event.stopPropagation();
+                }}
+            />
+        </div>
+    </RadioButton>
+    <RadioButton label="Second option" value="two">
+        <div style={{ marginLeft: 22 }}>
+            <input
+                type="text"
+                onChange={(event) => {
+                    // Prevent onChange propagation
+                    event.stopPropagation();
+                }}
+            />
+        </div>
     </RadioButton>
 </RadioGroup>
 ```
