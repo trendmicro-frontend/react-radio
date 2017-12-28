@@ -113,18 +113,6 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
 
 ### Properties
 
-#### RadioGroup
-
-Name | Type | Default | Description
-:--- | :--- | :------ | :----------
-children | any | | Children to pass through the component.
-className | Object | | Customized className for the component.
-style | Object | | Customized style for the component.
-disabled | Boolean | false | If true, the radio group will be displayed as disasbled.
-name | String | | Name for the input element group.
-value | Any | | Default value selected in the radio group.
-onChange | Function | | Callback function that will be invoked when the value changes.
-
 #### RadioButton
 
 Name | Type | Default | Description
@@ -140,6 +128,18 @@ disabled | Boolean | false | If true, the radio button will be shown as disabled
 label | Node or String | | Label for the radio button.
 name | String | | Name for the input element.
 value | Any | | Value for the radio button.
+onChange | Function | | Callback function that will be invoked when the value changes.
+
+#### RadioGroup
+
+Name | Type | Default | Description
+:--- | :--- | :------ | :----------
+children | any | | Children to pass through the component.
+className | Object | | Customized className for the component.
+style | Object | | Customized style for the component.
+disabled | Boolean | false | If true, the radio group will be displayed as disasbled.
+name | String | | Name for the input element group.
+value | Any | | Default value selected in the radio group.
 onChange | Function | | Callback function that will be invoked when the value changes.
 
 ### Class Properties
