@@ -21,7 +21,7 @@ class RadioGroup extends PureComponent {
     static propTypes = {
         disabled: PropTypes.bool,
         onChange: PropTypes.func,
-        value: PropTypes.string
+        value: PropTypes.any
     };
 
     static defaultProps = {
@@ -29,10 +29,6 @@ class RadioGroup extends PureComponent {
     };
 
     handleChange = (value, event) => {
-        if (typeof value === 'object') {
-            return;
-        }
-
         event.stopPropagation();
 
         if (typeof this.props.onChange === 'function') {
