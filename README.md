@@ -67,7 +67,7 @@ The label prop is optional, you can use children to pass through the component.
 <RadioGroup
     name="comic"
     value={this.state.value}
-    onChange={(value) => {
+    onChange={(value, event) => {
         this.setState({ value: value });
     }}
 >
@@ -90,6 +90,7 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
 
 ```jsx
 <RadioGroup
+    name="radiogroup"
     value={this.state.value}
     onChange={(value, event) => {
         if (typeof value === 'object') {
