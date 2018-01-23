@@ -152,8 +152,6 @@ onChange | Function | | Callback function that will be invoked when the value ch
 Name | Type | Default | Description
 :--- | :--- | :------ | :----------
 children | any | | Children to pass through the component.
-className | Object | | Customized className for the component.
-style | Object | | Customized style for the component.
 disabled | Boolean | false | If true, the radio group will be displayed as disasbled.
 name | String | | Name for the input element group.
 value | Any | | Default value selected in the radio group.

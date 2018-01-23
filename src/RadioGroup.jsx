@@ -2,21 +2,6 @@ import React, { cloneElement, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from './RadioButton';
 
-// Maps children and its children
-// @param {object} children React component children
-// @param {function} deepMapFn Deep Map callback
-// @returns {array} Deep Mapped children
-const deepMap = (children, deepMapFn) => React.Children.map(children, (child) => {
-    if (child.props && child.props.children && typeof child.props.children === 'object') {
-        // Clone the child that has children and map them as well
-        return deepMapFn(cloneElement(child, {
-            ...child.props,
-            children: deepMap(child.props.children, deepMapFn)
-        }));
-    }
-    return deepMapFn(child);
-});
-
 class RadioGroup extends PureComponent {
     static propTypes = {
         disabled: PropTypes.bool,
@@ -36,9 +21,18 @@ class RadioGroup extends PureComponent {
         }
     };
 
-    renderRadioButtons(children) {
-        return deepMap(children, child => {
-            if (React.isValidElement(child) && child.type === RadioButton) {
+    renderChildren = (children) => {
+        const mapChild = (child) => {
+            if (!React.isValidElement(child) || !child.props) {
+                return child;
+            }
+
+            if (child.type === RadioGroup) {
+                // No nested radio groups
+                return child;
+            }
+
+            if (child.type === RadioButton) {
                 return cloneElement(child, {
                     checked: this.props.value === child.props.value,
                     disabled: this.props.disabled || child.props.disabled,
@@ -46,21 +40,24 @@ class RadioGroup extends PureComponent {
                 });
             }
 
+            if (child.props.children && typeof child.props.children === 'object') {
+                return cloneElement(child, {
+                    children: this.renderChildren(child.props.children)
+                });
+            }
+
             return child;
-        });
-    }
+        };
+
+        if (Array.isArray(children)) {
+            return React.Children.map(children, mapChild);
+        } else {
+            return mapChild(children);
+        }
+    };
 
     render() {
-        const {
-            children,
-            ...props
-        } = this.props;
-
-        return (
-            <div {...props}>
-                {this.renderRadioButtons(children)}
-            </div>
-        );
+        return this.renderChildren(this.props.children);
     }
 }
 

@@ -12,12 +12,6 @@ test('mount', (t) => {
         t.end();
     });
 
-    test('<RadioGroup />', (t) => {
-        const wrapper = mount(<RadioGroup />);
-        t.equal(wrapper.find(RadioGroup).length, 1, 'should render <RadioGroup /> component');
-        t.end();
-    });
-
     t.end();
 });
 
