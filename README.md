@@ -196,7 +196,7 @@ Use the ref property to get a reference to this component:
 
 Name | Type | Description
 :--- | :--- | :----------
-value | Any | Get the value of the radio group.
+value | any | Get the value of the radio group.
 
 ## License
 
