@@ -1,3 +1,4 @@
+import chainedFunction from 'chained-function';
 import React, { cloneElement, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from './RadioButton';
@@ -14,8 +15,6 @@ class RadioGroup extends PureComponent {
     };
 
     handleChange = (value, event) => {
-        event.stopPropagation();
-
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(value, event);
         }
@@ -36,7 +35,12 @@ class RadioGroup extends PureComponent {
                 return cloneElement(child, {
                     checked: this.props.value === child.props.value,
                     disabled: this.props.disabled || child.props.disabled,
-                    onChange: this.handleChange.bind(this, child.props.value)
+                    onChange: chainedFunction(
+                        child.props.onChange,
+                        (event) => {
+                            this.handleChange(child.props.value, event);
+                        }
+                    )
                 });
             }
 

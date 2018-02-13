@@ -11,11 +11,6 @@ export default class extends PureComponent {
     };
 
     handleChangeByKey = (key) => (value, event) => {
-        if (typeof value === 'object' && event === undefined) {
-            // Prevent onChange propagation
-            return;
-        }
-
         this.setState({ [key]: value });
     };
 
