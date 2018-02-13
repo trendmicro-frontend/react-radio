@@ -144,7 +144,7 @@ defaultChecked | Boolean | | The default checked state of the radio button.
 disabled | Boolean | false | If true, the radio button will be shown as disabled and cannot be modified.
 label | Node or String | | Label for the radio button.
 name | String | | Name for the input element.
-value | Any | | Value for the radio button.
+value | any | | Value for the radio button.
 onChange | Function | | Callback function that will be invoked when the value changes.
 
 #### RadioGroup
@@ -154,14 +154,15 @@ Name | Type | Default | Description
 children | any | | Children to pass through the component.
 disabled | Boolean | false | If true, the radio group will be displayed as disasbled.
 name | String | | Name for the input element group.
-value | Any | | Default value selected in the radio group.
+value | any | | The value of the radio group.
+defaultValue | any | | The default value of the radio group.
 onChange | Function | | Callback function that will be invoked when the value changes.
 
 ### Class Properties
 
 #### RadioButton
 
-Use the ref property to get a reference to the component:
+Use the ref property to get a reference to this component:
 
 ```jsx
 <RadioButton
@@ -177,6 +178,25 @@ Use the ref property to get a reference to the component:
 Name | Type | Description
 :--- | :--- | :----------
 checked | Boolean | Get the checked state.
+
+#### RadioGroup
+
+Use the ref property to get a reference to this component:
+
+```jsx
+<RadioGroup
+    ref={node => {
+        if (node) {
+            this.radioGroup = node;
+            console.log(this.radioGroup.value);
+        }
+    }}
+/>
+```
+
+Name | Type | Description
+:--- | :--- | :----------
+value | Any | Get the value of the radio group.
 
 ## License
 

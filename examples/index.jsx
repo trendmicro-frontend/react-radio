@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import Navbar from './Navbar';
 import UncontrolledRadioButton from './UncontrolledRadioButton';
 import ControlledRadioButton from './ControlledRadioButton';
-import RadioGroup from './RadioGroup';
+import UncontrolledRadioGroup from './UncontrolledRadioGroup';
+import ControlledRadioGroup from './ControlledRadioGroup';
 
 const name = 'React Radio';
 const url = 'https://github.com/trendmicro-frontend/react-radio';
@@ -21,7 +22,10 @@ const App = () => (
                 <ControlledRadioButton />
             </div>
             <div className="col-lg-6 col-md-12">
-                <RadioGroup />
+                <UncontrolledRadioGroup />
+            </div>
+            <div className="col-lg-6 col-md-12">
+                <ControlledRadioGroup />
             </div>
         </div>
     </div>

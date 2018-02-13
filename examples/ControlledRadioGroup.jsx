@@ -17,7 +17,7 @@ export default class extends PureComponent {
     render() {
         return (
             <Section className="row-sm-11 row-md-6">
-                <h3>Radio Group</h3>
+                <h3>Controlled Radio Group</h3>
                 <h5>Stacked</h5>
                 <p>{`Selected: "${this.state.ports}"`}</p>
                 <RadioGroup
