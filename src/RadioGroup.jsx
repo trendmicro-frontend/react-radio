@@ -6,13 +6,16 @@ import RadioButton from './RadioButton';
 class RadioGroup extends PureComponent {
     static propTypes = {
         disabled: PropTypes.bool,
-        onChange: PropTypes.func,
+        name: PropTypes.string,
         value: PropTypes.any,
-        defaultValue: PropTypes.any
+        defaultValue: PropTypes.any,
+        onChange: PropTypes.func,
+        depth: PropTypes.number
     };
 
     static defaultProps = {
-        disabled: false
+        disabled: false,
+        depth: 1
     };
 
     state = {
@@ -37,7 +40,11 @@ class RadioGroup extends PureComponent {
         }
     };
 
-    renderChildren = (children) => {
+    renderChildren = (children, depth = 1) => {
+        if (depth > this.props.depth) {
+            return children;
+        }
+
         const mapChild = (child) => {
             if (!React.isValidElement(child) || !child.props) {
                 return child;
@@ -63,7 +70,7 @@ class RadioGroup extends PureComponent {
 
             if (child.props.children && typeof child.props.children === 'object') {
                 return cloneElement(child, {
-                    children: this.renderChildren(child.props.children)
+                    children: this.renderChildren(child.props.children, depth + 1)
                 });
             }
 

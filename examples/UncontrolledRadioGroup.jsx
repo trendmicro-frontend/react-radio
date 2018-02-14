@@ -22,6 +22,7 @@ export default class extends PureComponent {
                 <p>{`Selected: "${this.state.ports}"`}</p>
                 <RadioGroup
                     name="ports"
+                    depth={2}
                     onChange={this.handleChangeByKey('ports')}
                 >
                     <div>

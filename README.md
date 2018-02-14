@@ -63,10 +63,13 @@ The label prop is optional, you can use children to pass through the component.
 
 ### RadioGroup
 
+When rendering radio buttons deeply nested inside the radio group, you need to pass a `depth` prop to limit the recursion depth.
+
 ```jsx
 <RadioGroup
     name="comic"
     value={this.state.value}
+    depth={3} // This is needed to minimize the recursion overhead
     onChange={(value, event) => {
         this.setState({ value: value });
     }}
@@ -84,7 +87,7 @@ The label prop is optional, you can use children to pass through the component.
 </RadioGroup>
 ```
 
-## React onChange Propagation
+## Prevent onChange Propagation
 
 You may need to use `event.stopPropagation()` to stop **onChange** propagation when wrapping an input element inside the **RadioGroup** or **RadioButton** component.
 
@@ -93,11 +96,6 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
     name="radiogroup"
     value={this.state.value}
     onChange={(value, event) => {
-        if (typeof value === 'object') {
-            // You can prevent onChange propagation in one place
-            return;
-        }
-
         this.setState({ value: value });
     }}
 >
@@ -157,6 +155,7 @@ name | String | | Name for the input element group.
 value | any | | The value of the radio group.
 defaultValue | any | | The default value of the radio group.
 onChange | Function | | Callback function that will be invoked when the value changes.
+depth | Number | 1 | Limits the recursion depth when rendering radio buttons deeply inside a radio group.
 
 ### Class Properties
 
