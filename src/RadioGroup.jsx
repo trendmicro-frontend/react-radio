@@ -3,6 +3,8 @@ import React, { cloneElement, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from './RadioButton';
 
+const getComponentType = (Component) => (Component ? (<Component />).type : undefined);
+
 class RadioGroup extends PureComponent {
     static propTypes = {
         disabled: PropTypes.bool,
@@ -50,12 +52,12 @@ class RadioGroup extends PureComponent {
                 return child;
             }
 
-            if (child.type === RadioGroup) {
+            if (child.type === getComponentType(RadioGroup)) {
                 // No nested radio groups
                 return child;
             }
 
-            if (child.type === RadioButton) {
+            if (child.type === getComponentType(RadioButton)) {
                 return cloneElement(child, {
                     checked: (this.state.value !== undefined) && (this.state.value === child.props.value),
                     disabled: this.props.disabled || child.props.disabled,
