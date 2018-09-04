@@ -4,6 +4,7 @@
     reset-context();
 
     cursor: pointer;
+    position: relative;
 
     &.disabled {
         opacity: .4;
@@ -39,14 +40,21 @@
 
 // Radio button checked
 .input-radio:checked + .control-indicator::before {
-    content: "\2022";
-    color: #ffffff;
-    font-size: 16px;
-    text-align: center;
-    line-height: 14px;
     border: 1px solid #0096cc;
     background-color: #0096cc;
     transition: background-color .2s;
+}
+
+.input-radio:checked + .control-indicator::after {
+    content: ""
+    position: absolute;
+    left: 4px;
+    top: 7px;
+    height: 6px;
+    width: 6px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: background-color 0.2s;
 }
 
 // Hover
