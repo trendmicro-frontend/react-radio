@@ -8,16 +8,18 @@
     "lib"
   ],
   "scripts": {
-    "prepublish": "npm run eslint && npm test && npm run clean && npm run build && npm run build-examples",
+    "prepublish": "npm run eslint && npm test && npm run clean && npm run build && npm run styleguide:build && cp -a styleguide/* docs/",
     "build": "webpack && npm run cleancss",
     "build-examples": "cd examples; webpack",
-    "clean": "rm -f {lib,dist}/*",
+    "clean": "rm -rf {lib,dist,docs}/*",
     "cleancss": "cleancss -o dist/react-radio.min.css dist/react-radio.css",
     "demo": "http-server -p 8000 docs/",
     "eslint": "eslint --ext .js --ext .jsx examples src test",
     "test": "tap test/*.js --node-arg=--require --node-arg=babel-register --node-arg=--require --node-arg=babel-polyfill",
     "coveralls": "tap test/*.js --coverage --coverage-report=text-lcov --nyc-arg=--require --nyc-arg=babel-register --nyc-arg=--require --nyc-arg=babel-polyfill | coveralls",
-    "dev": "cd examples; webpack-dev-server --hot --inline --host 0.0.0.0 --port 8000 --content-base ../docs"
+    "dev": "cd examples; webpack-dev-server --hot --inline --host 0.0.0.0 --port 8000 --content-base ../docs",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "repository": {
     "type": "git",
@@ -85,8 +87,10 @@
     "http-server": "~0.11.1",
     "jsdom": "~11.6.2",
     "nib": "~1.1.2",
+    "path": "^0.12.7",
     "react": "~16.2.0",
     "react-dom": "~16.2.0",
+    "react-styleguidist": "^7.3.5",
     "sinon": "^4.3.0",
     "style-loader": "~0.20.1",
     "styled-components": "~3.1.6",
