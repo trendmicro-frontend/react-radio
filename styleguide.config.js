@@ -4,6 +4,10 @@ module.exports = {
 	title: 'React Radio',
 	webpackConfig: require('./webpack.config.js'),
 	components: ['examples/*Radio*.jsx', 'src/*.jsx'],
+	ribbon: {
+		url: 'https://github.com/trendmicro-frontend/react-radio',
+		text: 'Fork me on GitHub'
+	},
 	require: [
 		'babel-polyfill',
     	path.join(__dirname, 'node_modules/trendmicro-ui/dist/css/trendmicro-ui.css'),
