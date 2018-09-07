@@ -7,15 +7,22 @@ const noop = () => {};
 
 class RadioButton extends PureComponent {
     static propTypes = {
+        /** Label for the radio button. */
         label: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.node
         ]),
+        /** Customized class name for the radio button. */
         inputClassName: PropTypes.object,
+        /** Customized style for the radio button. */
         inputStyle: PropTypes.object,
+        /** If true, the radio button will be shown as disabled and cannot be modified. */
         disabled: PropTypes.bool,
+        /** Get the checked state. */
         checked: PropTypes.bool,
+        /** The default checked state of the radio button. */
         defaultChecked: PropTypes.bool,
+        /** Callback function that will be invoked when the value changes. */
         onChange: PropTypes.func
     };
 
