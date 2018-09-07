@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
 	title: 'React Radio',
+	styleguideDir: 'docs/',
 	webpackConfig: require('./webpack.config.js'),
 	components: ['examples/*Radio*.jsx', 'src/*.jsx'],
 	ribbon: {

@@ -8,7 +8,7 @@
     "lib"
   ],
   "scripts": {
-    "prepublish": "npm run eslint && npm test && npm run clean && npm run build && npm run styleguide:build && cp -a styleguide/* docs/",
+    "prepublish": "npm run eslint && npm test && npm run clean && npm run build && npm run styleguide:build",
     "build": "webpack && npm run cleancss",
     "build-examples": "cd examples; webpack",
     "clean": "rm -rf {lib,dist,docs}/*",
