@@ -4,7 +4,7 @@ module.exports = {
 	title: 'React Radio',
 	styleguideDir: 'docs/',
 	webpackConfig: require('./webpack.config.js'),
-	components: ['examples/*Radio*.jsx', 'src/*.jsx'],
+	components: ['src/*.jsx', 'examples/*Radio*.jsx'],
 	ribbon: {
 		url: 'https://github.com/trendmicro-frontend/react-radio',
 		text: 'Fork me on GitHub'
