@@ -7,5 +7,7 @@ module.exports = {
 	require: [
 		'babel-polyfill',
     	path.join(__dirname, 'node_modules/trendmicro-ui/dist/css/trendmicro-ui.css'),
+    	path.join(__dirname, 'node_modules/@trendmicro/react-buttons/dist/react-buttons.css'),
+    	path.join(__dirname, 'dist/react-radio.css'),
 	]
 };
