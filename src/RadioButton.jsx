@@ -1,28 +1,40 @@
+import chainedFunction from 'chained-function';
 import cx from 'classnames';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { RadioGroupContext } from './context';
 import styles from './index.styl';
 
 const noop = () => {};
 
-class RadioButton extends PureComponent {
+class RadioButton extends React.Component {
     static propTypes = {
-        /** Label for the radio button. */
+        /**
+         * Label for the radio button.
+         */
         label: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.node
         ]),
-        /** Customized class name for the radio button. */
-        inputClassName: PropTypes.object,
-        /** Customized style for the radio button. */
-        inputStyle: PropTypes.object,
-        /** If true, the radio button will be shown as disabled and cannot be modified. */
+
+        /**
+         * If true, the radio button will be shown as disabled and cannot be modified.
+         */
         disabled: PropTypes.bool,
-        /** Get the checked state. */
+
+        /**
+         * Get the checked state.
+         */
         checked: PropTypes.bool,
-        /** The default checked state of the radio button. */
+
+        /**
+         * The default checked state of the radio button.
+         */
         defaultChecked: PropTypes.bool,
-        /** Callback function that will be invoked when the value changes. */
+
+        /**
+         * Callback function that will be invoked when the value changes.
+         */
         onChange: PropTypes.func
     };
 
@@ -30,21 +42,20 @@ class RadioButton extends PureComponent {
         disabled: false
     };
 
-    radioButton = null;
+    radioButtonRef = React.createRef();
 
     get checked() {
-        if (!this.radioButton) {
+        if (!this.radioButtonRef.current) {
             return null;
         }
-        return this.radioButton.checked;
+        return this.radioButtonRef.current.checked;
     }
 
     render() {
         const {
             label,
-            inputClassName,
-            inputStyle,
             disabled,
+            value,
             onChange = noop,
 
             // Default props
@@ -55,32 +66,40 @@ class RadioButton extends PureComponent {
         } = this.props;
 
         return (
-            <label
-                className={cx(
-                    className,
-                    styles.controlRadio,
-                    { [styles.disabled]: disabled }
-                )}
-                style={style}
-            >
-                <input
-                    {...props}
-                    ref={node => {
-                        this.radioButton = node;
-                    }}
-                    type="radio"
-                    disabled={disabled}
-                    className={cx(
-                        inputClassName,
-                        styles.inputRadio
-                    )}
-                    style={inputStyle}
-                    onChange={onChange}
-                />
-                <i className={styles.controlIndicator} />
-                {label ? <span className={styles.textLabel}>{label}</span> : null}
-                {children}
-            </label>
+            <RadioGroupContext.Consumer>
+                {(radioGroup) => {
+                    if (radioGroup.value !== undefined) {
+                        props.checked = (radioGroup.value === value);
+                    }
+
+                    return (
+                        <label
+                            className={cx(
+                                className,
+                                styles.controlRadio,
+                                { [styles.disabled]: radioGroup.disabled || disabled }
+                            )}
+                            style={style}
+                        >
+                            <input
+                                {...props}
+                                ref={this.radioButtonRef}
+                                type="radio"
+                                disabled={disabled || radioGroup.disabled}
+                                value={value}
+                                onChange={chainedFunction(
+                                    onChange,
+                                    radioGroup.onChange,
+                                )}
+                                className={styles.inputRadio}
+                            />
+                            <i className={styles.controlIndicator} />
+                            {label ? <span className={styles.textLabel}>{label}</span> : null}
+                            {children}
+                        </label>
+                    );
+                }}
+            </RadioGroupContext.Consumer>
         );
     }
 }

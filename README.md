@@ -70,7 +70,8 @@ When rendering radio buttons deeply nested inside the radio group, you need to p
     name="comic"
     value={this.state.value}
     depth={3} // This is needed to minimize the recursion overhead
-    onChange={(value, event) => {
+    onChange={(event) => {
+        const value = event.target.value;
         this.setState({ value: value });
     }}
 >
@@ -95,7 +96,8 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
 <RadioGroup
     name="radiogroup"
     value={this.state.value}
-    onChange={(value, event) => {
+    onChange={(event) => {
+        const value = event.target.value;
         this.setState({ value: value });
     }}
 >
@@ -135,8 +137,6 @@ Name | Type | Default | Description
 children | any | | Children to pass through the component.
 className | Object | | Customized class name for the component.
 style | Object | | Customized style for the component.
-inputClassName | Object | | Customized class name for the radio button.
-inputStyle | Object | | Customized style for the radio button.
 checked | Boolean | | If true, the radio button will be selected. Transferred from the radio group.
 defaultChecked | Boolean | | The default checked state of the radio button.
 disabled | Boolean | false | If true, the radio button will be shown as disabled and cannot be modified.

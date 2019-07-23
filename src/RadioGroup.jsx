@@ -1,24 +1,29 @@
-import chainedFunction from 'chained-function';
-import React, { cloneElement, PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import RadioButton from './RadioButton';
+import { RadioGroupContext } from './context';
 
-const getComponentType = (Component) => (Component ? (<Component />).type : undefined);
-
-class RadioGroup extends PureComponent {
+class RadioGroup extends React.Component {
     static propTypes = {
         disabled: PropTypes.bool,
         name: PropTypes.string,
         value: PropTypes.any,
         defaultValue: PropTypes.any,
         onChange: PropTypes.func,
-        depth: PropTypes.number
     };
 
     static defaultProps = {
         disabled: false,
-        depth: 1
     };
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.value !== undefined && nextProps.value !== prevState.value) {
+            return {
+                value: nextProps.value,
+            };
+        }
+
+        return null;
+    }
 
     state = {
         value: (this.props.value !== undefined) ? this.props.value : this.props.defaultValue
@@ -28,74 +33,34 @@ class RadioGroup extends PureComponent {
         return this.state.value;
     }
 
-    handleChange = (value, event) => {
+    handleChange = (event) => {
         if (this.props.value !== undefined) {
             // Controlled component
-            this.setState({ value: this.props.value });
+            const value = this.props.value;
+            this.setState({ value });
         } else {
             // Uncontrolled component
-            this.setState({ value: value });
+            const value = event.target.value;
+            this.setState({ value });
         }
 
         if (typeof this.props.onChange === 'function') {
-            this.props.onChange(value, event);
+            this.props.onChange(event);
         }
     };
-
-    renderChildren = (children, depth = 1) => {
-        if (depth > this.props.depth) {
-            return children;
-        }
-
-        const mapChild = (child) => {
-            if (!React.isValidElement(child) || !child.props) {
-                return child;
-            }
-
-            if (child.type === getComponentType(RadioGroup)) {
-                // No nested radio groups
-                return child;
-            }
-
-            if (child.type === getComponentType(RadioButton)) {
-                return cloneElement(child, {
-                    checked: (this.state.value !== undefined) && (this.state.value === child.props.value),
-                    disabled: this.props.disabled || child.props.disabled,
-                    onChange: chainedFunction(
-                        child.props.onChange,
-                        (event) => {
-                            this.handleChange(child.props.value, event);
-                        }
-                    )
-                });
-            }
-
-            if (child.props.children && typeof child.props.children === 'object') {
-                return cloneElement(child, {
-                    children: this.renderChildren(child.props.children, depth + 1)
-                });
-            }
-
-            return child;
-        };
-
-        if (Array.isArray(children)) {
-            return React.Children.map(children, mapChild);
-        } else {
-            return mapChild(children);
-        }
-    };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== undefined) {
-            this.setState({
-                value: nextProps.value
-            });
-        }
-    }
 
     render() {
-        return this.renderChildren(this.props.children);
+        return (
+            <RadioGroupContext.Provider
+                value={{
+                    disabled: this.props.disabled,
+                    value: this.state.value,
+                    onChange: this.handleChange,
+                }}
+            >
+                {this.props.children}
+            </RadioGroupContext.Provider>
+        );
     }
 }
 
