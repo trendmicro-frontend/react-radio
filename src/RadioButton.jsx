@@ -93,8 +93,8 @@ class RadioButton extends React.Component {
                                 )}
                                 className={styles.inputRadio}
                             />
-                            <i className={styles.controlIndicator} />
-                            {label ? <span className={styles.textLabel}>{label}</span> : null}
+                            <div className={styles.controlIndicator} />
+                            {label ? <div className={styles.textLabel}>{label}</div> : null}
                             {children}
                         </label>
                     );
