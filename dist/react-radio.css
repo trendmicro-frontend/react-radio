@@ -1,27 +1,27 @@
-/*! react-radio v3.2.2 | (c) 2018 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-radio */
+/*! react-radio v4.0.0-alpha | (c) 2019 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-radio */
 .radio---control-radio---2rwkY {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  line-height: 20px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   position: relative;
 }
 .radio---control-radio---2rwkY *,
 .radio---control-radio---2rwkY *:before,
 .radio---control-radio---2rwkY *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
 .radio---control-radio---2rwkY.radio---disabled---eCY9b {
   opacity: 0.4;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-  filter: alpha(opacity=40);
   cursor: not-allowed;
 }
 .radio---control-radio---2rwkY .radio---control-indicator---dcwXW {
+  display: flex;
+  align-items: center;
   pointer-events: none;
+}
+.radio---control-radio---2rwkY .radio---text-label---2D19D {
+  display: inline-block;
 }
 .radio---control-radio---2rwkY + .radio---control-radio---2rwkY {
   margin-left: 16px;
@@ -36,7 +36,6 @@
   border: 1px solid #999;
   border-radius: 50%;
   margin-right: 8px;
-  margin-top: 3px;
   width: 14px;
   height: 14px;
   vertical-align: top;
@@ -44,25 +43,16 @@
 .radio---input-radio---2yM_b:checked + .radio---control-indicator---dcwXW::before {
   border: 1px solid #0096cc;
   background-color: #0096cc;
-  -webkit-transition: background-color 0.2s;
-  -moz-transition: background-color 0.2s;
-  -o-transition: background-color 0.2s;
-  -ms-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 .radio---input-radio---2yM_b:checked + .radio---control-indicator---dcwXW::after {
   content: "";
   position: absolute;
   left: 4px;
-  top: 7px;
   height: 6px;
   width: 6px;
   background-color: #fff;
   border-radius: 50%;
-  -webkit-transition: background-color 0.2s;
-  -moz-transition: background-color 0.2s;
-  -o-transition: background-color 0.2s;
-  -ms-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 .radio---control-radio---2rwkY:not(.radio---disabled---eCY9b):hover > .radio---control-indicator---dcwXW::before {
@@ -79,31 +69,6 @@
   border: 1px solid #999;
   background-color: #ddd;
 }
-.radio---section---foyYY {
-  background: #fff;
-  border: 1px solid #d6d6d6;
-  position: relative;
-  z-index: 1;
-  -webkit-transition: height 0.3s ease;
-  -moz-transition: height 0.3s ease;
-  -o-transition: height 0.3s ease;
-  -ms-transition: height 0.3s ease;
-  transition: height 0.3s ease;
-}
-.radio---section---foyYY:last-child {
-  margin-bottom: 20px;
-}
-.radio---section-content---TYJOP {
-  padding: 0 16px 16px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-@media screen and (max-width: 1023px) {
-  .radio---section-content---TYJOP {
-    position: static;
-    height: 100%;
-  }
-}
+
+
+/*# sourceMappingURL=react-radio.css.map*/
