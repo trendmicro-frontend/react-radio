@@ -103,15 +103,18 @@ test('simulates change event', (t) => {
 
     test('RadioGroup', (t) => {
         const spy = sinon.spy();
+        const value = 'one';
         const wrapper = mount((
             <RadioGroup name="name" onChange={spy}>
-                <RadioButton value="value" />
+                <RadioButton value={value} />
             </RadioGroup>
         ));
         wrapper.find('input').simulate('change');
 
         t.ok(spy.calledOnce);
-        t.equal(spy.getCall(0).args[0], 'value');
+
+        const syntheticEvent = spy.getCall(0).args[0];
+        t.equal(syntheticEvent.target.value, value);
         t.end();
     });
 
