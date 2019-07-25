@@ -116,7 +116,9 @@ module.exports = {
             components: [
                 'RadioButton',
                 'RadioGroup',
-            ].map(c => path.resolve(__dirname, `src/${c}.jsx`))
+            ].map(c => path.resolve(__dirname, `src/${c}.jsx`)),
+            usageMode: 'expand',
+            exampleMode: 'hide',
         }
     ],
     require: [
@@ -132,6 +134,7 @@ module.exports = {
     },
     serverPort: 8080,
     exampleMode: 'collapse',
+    usageMode: 'expand',
     showSidebar: true,
     styleguideComponents: {
         StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer.jsx'),
