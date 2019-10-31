@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const pkg = require('./package.json');
+const babelConfig = require('./babel.config');
 
 const webpackConfig = {
     mode: 'development',
@@ -22,7 +23,10 @@ const webpackConfig = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/
+                // XXX: due to untranspiled code in styleguide's node_modules, it needs to include them
+                // https://github.com/styleguidist/react-styleguidist/blob/f14e8e7f403aa32045b9f61e4e4f1a7776146d8b/examples/ie11/styleguide.config.js#L4
+                exclude: /node_modules\/(?!(ansi-styles|strip-ansi|ansi-regex|react-dev-utils|chalk|regexpu-core|unicode-match-property-ecmascript|unicode-match-property-value-ecmascript|acorn-jsx)\/).*/,
+                options: babelConfig
             },
             {
                 test: /\.styl$/,
