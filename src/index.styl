@@ -17,6 +17,8 @@
         display: flex;
         align-items: center;
         pointer-events: none;
+        // XXX: due to IE11 issue, it needs min-width to prevent width compression
+        min-width: 22px; // 14px + 8px = 22px
     }
 
     .text-label {
@@ -55,6 +57,8 @@
 .input-radio:checked + .control-indicator::after {
     content: "";
     position: absolute;
+    // XXX: due to IE11 issue, it needs to set top to correct position of ::after
+    top: calc(50% - 3px);
     left: 4px; // 14px - 6px - 4px = 4px
     height: 6px;
     width: 6px;

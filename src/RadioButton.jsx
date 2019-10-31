@@ -23,6 +23,11 @@ class RadioButton extends React.Component {
         disabled: PropTypes.bool,
 
         /**
+         * Value for the radio button.
+         */
+        value: PropTypes.any,
+
+        /**
          * Get the checked state.
          */
         checked: PropTypes.bool,
