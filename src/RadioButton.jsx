@@ -2,6 +2,7 @@ import chainedFunction from 'chained-function';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as sharedPropTypes from './shared/prop-types';
 import { RadioGroupContext } from './context';
 import styles from './index.styl';
 
@@ -28,6 +29,11 @@ class RadioButton extends React.Component {
         value: PropTypes.any,
 
         /**
+         * Tag is a element to replace <label/> of radio button.
+         */
+        tag: sharedPropTypes.tag,
+
+        /**
          * Get the checked state.
          */
         checked: PropTypes.bool,
@@ -44,6 +50,7 @@ class RadioButton extends React.Component {
     };
 
     static defaultProps = {
+        tag: 'label',
         disabled: false
     };
 
@@ -61,6 +68,7 @@ class RadioButton extends React.Component {
             label,
             disabled,
             value,
+            tag: Tag,
             onChange = noop,
 
             // Default props
@@ -78,7 +86,7 @@ class RadioButton extends React.Component {
                     }
 
                     return (
-                        <label
+                        <Tag
                             className={cx(
                                 className,
                                 styles.controlRadio,
@@ -101,7 +109,7 @@ class RadioButton extends React.Component {
                             <div className={styles.controlIndicator} />
                             {label ? <div className={styles.textLabel}>{label}</div> : null}
                             {children}
-                        </label>
+                        </Tag>
                     );
                 }}
             </RadioGroupContext.Consumer>
