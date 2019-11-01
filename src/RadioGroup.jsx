@@ -86,10 +86,10 @@ class RadioGroup extends PureComponent {
         }
     };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== undefined) {
+    componentDidUpdate() {
+        if (this.props.value !== undefined) {
             this.setState({
-                value: nextProps.value
+                value: this.props.value
             });
         }
     }
