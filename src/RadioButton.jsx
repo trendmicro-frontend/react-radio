@@ -7,6 +7,9 @@ import { RadioGroupContext } from './context';
 import styles from './index.styl';
 
 const noop = () => {};
+const deprecate = ({ deprecatedPropName, remappedPropName }) => {
+    console.warn(`Warning: the "${deprecatedPropName}" prop is deprecated. Use "${remappedPropName}" instead.`);
+};
 
 class RadioButton extends React.Component {
     static propTypes = {
@@ -16,7 +19,7 @@ class RadioButton extends React.Component {
         label: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.node
-        ]),
+        ]), // deprecated
 
         /**
          * If true, the radio button will be shown as disabled and cannot be modified.
@@ -65,7 +68,7 @@ class RadioButton extends React.Component {
 
     render() {
         const {
-            label,
+            label, // deprecated
             disabled,
             value,
             tag: Tag,
@@ -78,19 +81,31 @@ class RadioButton extends React.Component {
             ...props
         } = this.props;
 
+        if (label !== undefined) {
+            deprecate({
+                deprecatedPropName: 'label',
+                remappedPropName: 'children',
+            });
+        }
+
         return (
             <RadioGroupContext.Consumer>
                 {(radioGroup) => {
                     if (radioGroup.value !== undefined) {
                         props.checked = (radioGroup.value === value);
                     }
+                    const radioDisabled = radioGroup.disabled || disabled;
+                    const radioOnChange = chainedFunction(
+                        onChange,
+                        radioGroup.onChange,
+                    );
 
                     return (
                         <Tag
                             className={cx(
                                 className,
                                 styles.controlRadio,
-                                { [styles.disabled]: radioGroup.disabled || disabled }
+                                { [styles.disabled]: radioDisabled }
                             )}
                             style={style}
                         >
@@ -98,17 +113,24 @@ class RadioButton extends React.Component {
                                 {...props}
                                 ref={this.radioButtonRef}
                                 type="radio"
-                                disabled={disabled || radioGroup.disabled}
+                                disabled={radioDisabled}
                                 value={value}
-                                onChange={chainedFunction(
-                                    onChange,
-                                    radioGroup.onChange,
-                                )}
+                                onChange={radioOnChange}
                                 className={styles.inputRadio}
                             />
                             <div className={styles.controlIndicator} />
-                            {label ? <div className={styles.textLabel}>{label}</div> : null}
-                            {children}
+                            {
+                                label ? <div className={styles.textLabel}>{label}</div> : null // deprecated
+                            }
+                            {typeof children === 'function'
+                                ? children({
+                                    value,
+                                    checked: props.checked,
+                                    disabled: radioDisabled,
+                                    onChange: radioOnChange
+                                })
+                                : children
+                            }
                         </Tag>
                     );
                 }}
