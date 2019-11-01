@@ -2,8 +2,10 @@ import { Input } from '@trendmicro/react-form-control';
 import { Container, Row, Col } from '@trendmicro/react-grid-system';
 import FormGroup from './components/FormGroup';
 import Text from './components/Text';
+import CustomizedTag from './components/CustomizedTag';
 import { RadioButton, RadioGroup } from '../src';
 
+global.CustomizedTag = CustomizedTag;
 global.Input = Input;
 global.Container = Container;
 global.Row = Row;

@@ -130,6 +130,31 @@
                     </FormGroup>
                 </Col>
             </Row>
+            <FormGroup>
+                <Text size={20}>
+                    Customizing the wrapper component
+                </Text>
+            </FormGroup>
+            <Row>
+                <Col>
+                    <FormGroup>
+                        <RadioButton
+                            checked={false}
+                            tag="div"
+                            label="Unchecked"
+                        />
+                    </FormGroup>
+                </Col>
+                <Col>
+                    <FormGroup>
+                        <RadioButton
+                            checked={false}
+                            tag={CustomizedTag}
+                            label="Unchecked"
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
         </Col>
     </Row>
 </Container>

@@ -121,6 +121,31 @@
                     </FormGroup>
                 </Col>
             </Row>
+            <FormGroup>
+                <Text size={20}>
+                    Customizing the wrapper component
+                </Text>
+            </FormGroup>
+            <Row>
+                <Col>
+                    <FormGroup>
+                        <RadioButton
+                            defaultChecked
+                            tag="div"
+                            label="Checked"
+                        />
+                    </FormGroup>
+                </Col>
+                <Col>
+                    <FormGroup>
+                        <RadioButton
+                            defaultChecked
+                            tag={CustomizedTag}
+                            label="Checked"
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
         </Col>
     </Row>
 </Container>
