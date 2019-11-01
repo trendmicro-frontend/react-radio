@@ -26,13 +26,14 @@ const handleChangeByKey = (key) => (event) => {
                 onChange={handleChangeByKey('ports')}
             >
                 <FormGroup>
-                    <RadioButton label="All ports" value="all" />
+                    <RadioButton value="all">
+                        {'All ports'}
+                    </RadioButton>
                 </FormGroup>
                 <FormGroup>
-                    <RadioButton
-                        label="Specified ports"
-                        value="custom"
-                    />
+                    <RadioButton value="custom">
+                        {'Specified ports'}
+                    </RadioButton>
                     <div style={{ marginLeft: 22 }}>
                         <Input
                             type="text"
@@ -48,7 +49,9 @@ const handleChangeByKey = (key) => (event) => {
                     </div>
                 </FormGroup>
                 <FormGroup>
-                    <RadioButton label="Range" value="range" />
+                    <RadioButton value="range">
+                        {'Range'}
+                    </RadioButton>
                 </FormGroup>
                 <FormGroup style={{ marginLeft: 22 }}>
                     <Row>
@@ -95,10 +98,10 @@ const handleChangeByKey = (key) => (event) => {
                     value={state.comic}
                     onChange={handleChangeByKey('comic')}
                 >
-                    <RadioButton label="Batman (DC)" value="dc:batman" />
-                    <RadioButton label="Hulk (Marvel)" value="marvel:hulk" />
-                    <RadioButton label="Superman (DC)" value="dc:superman" />
-                    <RadioButton label="Spider-Man (Marvel)" value="marvel:spiderman" disabled />
+                    <RadioButton value="dc:batman">{'Batman (DC)'}</RadioButton>
+                    <RadioButton value="marvel:hulk">{'Hulk (Marvel)'}</RadioButton>
+                    <RadioButton value="dc:superman">{'Superman (DC)'}</RadioButton>
+                    <RadioButton value="marvel:spiderman" disabled>{'Spider-Man (Marvel)'}</RadioButton>
                 </RadioGroup>
             </FormGroup>
         </Col>
