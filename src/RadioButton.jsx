@@ -14,12 +14,17 @@ const deprecate = ({ deprecatedPropName, remappedPropName }) => {
 class RadioButton extends React.Component {
     static propTypes = {
         /**
-         * Label for the radio button.
+         * [Deprecated] Label for the radio button.
          */
         label: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.node
         ]), // deprecated
+
+        /**
+         * Children to pass through the component.
+         */
+        children: PropTypes.any,
 
         /**
          * If true, the radio button will be shown as disabled and cannot be modified.

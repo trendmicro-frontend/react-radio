@@ -53,13 +53,26 @@ test('checked state', (t) => {
     t.end();
 });
 
-test('renders text label', (t) => {
+test('renders children', (t) => {
     test('RadioButton', (t) => {
-        const wrapper = mount(<RadioButton />);
-        t.equal(wrapper.props().label, undefined, 'text label should be empty');
-        wrapper.setProps({ label: 'My label' }); // Set new label
-        t.equal(wrapper.props().label, 'My label', 'text label should be equal to "My label"');
-        t.equal(wrapper.text(), 'My label', 'text label should be equal to "My label"');
+        const wrapper = mount((
+            <RadioButton>
+                My label
+            </RadioButton>
+        ));
+        t.equal(wrapper.text(), 'My label', 'text should be equal to "My label"');
+        t.end();
+    });
+
+    test('RadioButton', (t) => {
+        const wrapper = mount((
+            <RadioButton>
+                {({ value, checked, disabled, onChange }) => (
+                    <p>My label</p>
+                )}
+            </RadioButton>
+        ));
+        t.ok(wrapper.contains(<p>My label</p>));
         t.end();
     });
 
