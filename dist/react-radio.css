@@ -16,15 +16,14 @@
   cursor: not-allowed;
 }
 .radio---control-radio---2rwkY .radio---control-indicator---dcwXW {
+  position: relative;
   display: flex;
   align-items: center;
   pointer-events: none;
+  min-width: 22px;
 }
 .radio---control-radio---2rwkY .radio---text-label---2D19D {
   display: inline-block;
-}
-.radio---control-radio---2rwkY + .radio---control-radio---2rwkY {
-  margin-left: 16px;
 }
 .radio---input-radio---2yM_b {
   display: none;
@@ -48,6 +47,7 @@
 .radio---input-radio---2yM_b:checked + .radio---control-indicator---dcwXW::after {
   content: "";
   position: absolute;
+  top: calc(50% - 3px);
   left: 4px;
   height: 6px;
   width: 6px;
