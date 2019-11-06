@@ -1,4 +1,16 @@
 ```jsx
+initialState = {
+    focus: 'Default'
+};
+
+const handleFocusInOut = (focus) => (event) => {
+    if (focus) {
+        setState({ focus: 'Focus In' });
+    } else {
+        setState({ focus: 'Focus Out' });
+    }
+};
+
 <Container fluid>
     <Row>
         <Col>
@@ -145,6 +157,38 @@
                             tag={CustomizedTag}
                         >
                             {'Checked'}
+                        </RadioButton>
+                    </FormGroup>
+                </Col>
+            </Row>
+            <FormGroup>
+                <Text size={20}>
+                    onFocus & onBlur
+                </Text>
+            </FormGroup>
+            <Row>
+                <Col>
+                    <FormGroup>
+                        <RadioButton
+                            onFocus={handleFocusInOut(true)}
+                            onBlur={handleFocusInOut(false)}
+                            tag="div"
+                        >
+                            {({ value, checked, disabled, onChange, onFocus, onBlur }) => (
+                                <Fragment>
+                                    <span style={{ width: 120 }}>{`${state.focus}`}</span>
+                                    <Input
+                                        type="text"
+                                        placeholder="Try to focus on me"
+                                        onFocus={event => {
+                                            onFocus(event);
+                                        }}
+                                        onBlur={event => {
+                                            onBlur(event);
+                                        }}
+                                    />
+                                </Fragment>
+                            )}
                         </RadioButton>
                     </FormGroup>
                 </Col>
