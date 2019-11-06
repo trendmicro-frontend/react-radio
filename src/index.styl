@@ -1,4 +1,5 @@
 @import "reset-context";
+@import "visually-hidden";
 
 .control-radio {
     reset-context();
@@ -28,7 +29,7 @@
 }
 
 .input-radio {
-    display: none;
+    visually-hidden();
 }
 
 .input-radio + .control-indicator::before {
@@ -42,7 +43,6 @@
     height: 14px;
     vertical-align: top;
 }
-
 
 // Radio button checked
 .input-radio:checked + .control-indicator::before {
