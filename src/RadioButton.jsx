@@ -32,6 +32,16 @@ class RadioButton extends React.Component {
         disabled: PropTypes.bool,
 
         /**
+         * Id for the input field of radio button.
+         */
+        id: PropTypes.string,
+
+        /**
+         * Name for the input field of radio button.
+         */
+        name: PropTypes.string,
+
+        /**
          * Value for the radio button.
          */
         value: PropTypes.any,
@@ -54,7 +64,17 @@ class RadioButton extends React.Component {
         /**
          * Callback function that will be invoked when the value changes.
          */
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+
+        /**
+         * Callback function that will be invoked when the focus is removed from radio button.
+         */
+        onBlur: PropTypes.func,
+
+        /**
+         * Callback function that will be invoked when the focus is set on radio button.
+         */
+        onFocus: PropTypes.func
     };
 
     static defaultProps = {
@@ -75,9 +95,15 @@ class RadioButton extends React.Component {
         const {
             label, // deprecated
             disabled,
+            id,
+            name,
             value,
             tag: Tag,
             onChange = noop,
+            onBlur = noop,
+            onFocus = noop,
+            checked,
+            defaultChecked,
 
             // Default props
             className,
@@ -96,8 +122,9 @@ class RadioButton extends React.Component {
         return (
             <RadioGroupContext.Consumer>
                 {(radioGroup) => {
+                    let radioChecked = checked;
                     if (radioGroup.value !== undefined) {
-                        props.checked = (radioGroup.value === value);
+                        radioChecked = (radioGroup.value === value);
                     }
                     const radioDisabled = radioGroup.disabled || disabled;
                     const radioOnChange = chainedFunction(
@@ -113,14 +140,20 @@ class RadioButton extends React.Component {
                                 { [styles.disabled]: radioDisabled }
                             )}
                             style={style}
+                            {...props}
                         >
                             <input
-                                {...props}
+                                id={id}
+                                name={name}
                                 ref={this.radioButtonRef}
                                 type="radio"
                                 disabled={radioDisabled}
                                 value={value}
+                                checked={radioChecked}
+                                defaultChecked={defaultChecked}
                                 onChange={radioOnChange}
+                                onBlur={onBlur}
+                                onFocus={onFocus}
                                 className={styles.inputRadio}
                             />
                             <div className={styles.controlIndicator} />
@@ -130,9 +163,11 @@ class RadioButton extends React.Component {
                             {typeof children === 'function'
                                 ? children({
                                     value,
-                                    checked: props.checked,
+                                    checked: radioChecked,
                                     disabled: radioDisabled,
-                                    onChange: radioOnChange
+                                    onChange: radioOnChange,
+                                    onBlur: onBlur,
+                                    onFocus: onFocus,
                                 })
                                 : children
                             }
