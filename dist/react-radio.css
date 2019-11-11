@@ -26,7 +26,15 @@
   display: inline-block;
 }
 .radio---input-radio---2yM_b {
-  display: none;
+  border: 0px;
+  clip-path: circle(0%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
 }
 .radio---input-radio---2yM_b + .radio---control-indicator---dcwXW::before {
   content: "";

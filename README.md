@@ -76,13 +76,10 @@ Or use render props to show the component.
 
 ### RadioGroup
 
-When rendering radio buttons deeply nested inside the radio group, you need to pass a `depth` prop to limit the recursion depth.
-
 ```jsx
 <RadioGroup
     name="comic"
     value={this.state.value}
-    depth={3} // This is needed to minimize the recursion overhead
     onChange={(event) => {
         const value = event.target.value;
         this.setState({ value: value });
@@ -156,9 +153,12 @@ checked | Boolean | | If true, the radio button will be selected. Transferred fr
 defaultChecked | Boolean | | The default checked state of the radio button.
 disabled | Boolean | false | If true, the radio button will be shown as disabled and cannot be modified.
 tag | Function or String | label | Customized wrapper component to replace label.
+id | String | | Id for the input field of radio button.
 name | String | | Name for the input element.
 value | any | | Value for the radio button.
 onChange | Function | | Callback function that will be invoked when the value changes.
+onFocus | Function | | Callback function that will be invoked when the focus is set on radio button.
+onBlur | Function | | Callback function that will be invoked when the focus is removed from radio button.
 
 #### RadioGroup
 
@@ -170,47 +170,17 @@ name | String | | Name for the input element group.
 value | any | | The value of the radio group.
 defaultValue | any | | The default value of the radio group.
 onChange | Function | | Callback function that will be invoked when the value changes.
-depth | Number | 1 | Limits the recursion depth when rendering radio buttons deeply inside a radio group.
 
 ### Class Properties
 
 #### RadioButton
 
-Use the ref property to get a reference to this component:
+Use the ref property to get a reference to radio button:
 
 ```jsx
-<RadioButton
-    ref={node => {
-        if (node) {
-            this.radioButton = node;
-            console.log(this.radioButton.checked);
-        }
-    }}
-/>
+const ref = React.createRef();
+<RadioButton ref={ref} />
 ```
-
-Name | Type | Description
-:--- | :--- | :----------
-checked | Boolean | Get the checked state.
-
-#### RadioGroup
-
-Use the ref property to get a reference to this component:
-
-```jsx
-<RadioGroup
-    ref={node => {
-        if (node) {
-            this.radioGroup = node;
-            console.log(this.radioGroup.value);
-        }
-    }}
-/>
-```
-
-Name | Type | Description
-:--- | :--- | :----------
-value | any | Get the value of the radio group.
 
 ## License
 
