@@ -11,172 +11,161 @@ const deprecate = ({ deprecatedPropName, remappedPropName }) => {
     console.warn(`Warning: the "${deprecatedPropName}" prop is deprecated. Use "${remappedPropName}" instead.`);
 };
 
-class RadioButton extends React.Component {
-    static propTypes = {
-        /**
-         * [Deprecated] Label for the radio button.
-         */
-        label: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.node
-        ]), // deprecated
+const RadioButton = React.forwardRef((props, ref) => {
+    const {
+        label, // deprecated
+        disabled,
+        id,
+        name,
+        value,
+        tag: Tag,
+        onChange = noop,
+        onBlur = noop,
+        onFocus = noop,
+        checked,
+        defaultChecked,
 
-        /**
-         * Children to pass through the component.
-         */
-        children: PropTypes.any,
+        // Default props
+        className,
+        style,
+        children,
+        ...restProps
+    } = props;
 
-        /**
-         * If true, the radio button will be shown as disabled and cannot be modified.
-         */
-        disabled: PropTypes.bool,
-
-        /**
-         * Id for the input field of radio button.
-         */
-        id: PropTypes.string,
-
-        /**
-         * Name for the input field of radio button.
-         */
-        name: PropTypes.string,
-
-        /**
-         * Value for the radio button.
-         */
-        value: PropTypes.any,
-
-        /**
-         * Tag is a element to replace <label/> of radio button.
-         */
-        tag: sharedPropTypes.tag,
-
-        /**
-         * Get the checked state.
-         */
-        checked: PropTypes.bool,
-
-        /**
-         * The default checked state of the radio button.
-         */
-        defaultChecked: PropTypes.bool,
-
-        /**
-         * Callback function that will be invoked when the value changes.
-         */
-        onChange: PropTypes.func,
-
-        /**
-         * Callback function that will be invoked when the focus is removed from radio button.
-         */
-        onBlur: PropTypes.func,
-
-        /**
-         * Callback function that will be invoked when the focus is set on radio button.
-         */
-        onFocus: PropTypes.func
-    };
-
-    static defaultProps = {
-        tag: 'label',
-        disabled: false
-    };
-
-    radioButtonRef = React.createRef();
-
-    get checked() {
-        if (!this.radioButtonRef.current) {
-            return null;
-        }
-        return this.radioButtonRef.current.checked;
+    if (label !== undefined) {
+        deprecate({
+            deprecatedPropName: 'label',
+            remappedPropName: 'children',
+        });
     }
 
-    render() {
-        const {
-            label, // deprecated
-            disabled,
-            id,
-            name,
-            value,
-            tag: Tag,
-            onChange = noop,
-            onBlur = noop,
-            onFocus = noop,
-            checked,
-            defaultChecked,
+    return (
+        <RadioGroupContext.Consumer>
+            {(radioGroup) => {
+                let radioChecked = checked;
+                if (radioGroup.value !== undefined) {
+                    radioChecked = (radioGroup.value === value);
+                }
+                const radioDisabled = radioGroup.disabled || disabled;
+                const radioOnChange = chainedFunction(
+                    onChange,
+                    radioGroup.onChange,
+                );
 
-            // Default props
-            className,
-            style,
-            children,
-            ...props
-        } = this.props;
+                return (
+                    <Tag
+                        className={cx(
+                            className,
+                            styles.controlRadio,
+                            { [styles.disabled]: radioDisabled }
+                        )}
+                        style={style}
+                        {...restProps}
+                    >
+                        <input
+                            id={id}
+                            name={name}
+                            ref={ref}
+                            type="radio"
+                            disabled={radioDisabled}
+                            value={value}
+                            checked={radioChecked}
+                            defaultChecked={defaultChecked}
+                            onChange={radioOnChange}
+                            onBlur={onBlur}
+                            onFocus={onFocus}
+                            className={styles.inputRadio}
+                        />
+                        <div className={styles.controlIndicator} />
+                        {
+                            label ? <div className={styles.textLabel}>{label}</div> : null // deprecated
+                        }
+                        {typeof children === 'function'
+                            ? children({
+                                value,
+                                checked: radioChecked,
+                                disabled: radioDisabled,
+                                onChange: radioOnChange,
+                                onBlur: onBlur,
+                                onFocus: onFocus,
+                            })
+                            : children
+                        }
+                    </Tag>
+                );
+            }}
+        </RadioGroupContext.Consumer>
+    );
+});
 
-        if (label !== undefined) {
-            deprecate({
-                deprecatedPropName: 'label',
-                remappedPropName: 'children',
-            });
-        }
+RadioButton.propTypes = {
+    /**
+     * [Deprecated] Label for the radio button.
+     */
+    label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]), // deprecated
 
-        return (
-            <RadioGroupContext.Consumer>
-                {(radioGroup) => {
-                    let radioChecked = checked;
-                    if (radioGroup.value !== undefined) {
-                        radioChecked = (radioGroup.value === value);
-                    }
-                    const radioDisabled = radioGroup.disabled || disabled;
-                    const radioOnChange = chainedFunction(
-                        onChange,
-                        radioGroup.onChange,
-                    );
+    /**
+     * Children to pass through the component.
+     */
+    children: PropTypes.any,
 
-                    return (
-                        <Tag
-                            className={cx(
-                                className,
-                                styles.controlRadio,
-                                { [styles.disabled]: radioDisabled }
-                            )}
-                            style={style}
-                            {...props}
-                        >
-                            <input
-                                id={id}
-                                name={name}
-                                ref={this.radioButtonRef}
-                                type="radio"
-                                disabled={radioDisabled}
-                                value={value}
-                                checked={radioChecked}
-                                defaultChecked={defaultChecked}
-                                onChange={radioOnChange}
-                                onBlur={onBlur}
-                                onFocus={onFocus}
-                                className={styles.inputRadio}
-                            />
-                            <div className={styles.controlIndicator} />
-                            {
-                                label ? <div className={styles.textLabel}>{label}</div> : null // deprecated
-                            }
-                            {typeof children === 'function'
-                                ? children({
-                                    value,
-                                    checked: radioChecked,
-                                    disabled: radioDisabled,
-                                    onChange: radioOnChange,
-                                    onBlur: onBlur,
-                                    onFocus: onFocus,
-                                })
-                                : children
-                            }
-                        </Tag>
-                    );
-                }}
-            </RadioGroupContext.Consumer>
-        );
-    }
-}
+    /**
+     * If true, the radio button will be shown as disabled and cannot be modified.
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Id for the input field of radio button.
+     */
+    id: PropTypes.string,
+
+    /**
+     * Name for the input field of radio button.
+     */
+    name: PropTypes.string,
+
+    /**
+     * Value for the radio button.
+     */
+    value: PropTypes.any,
+
+    /**
+     * Tag is a element to replace <label/> of radio button.
+     */
+    tag: sharedPropTypes.tag,
+
+    /**
+     * Get the checked state.
+     */
+    checked: PropTypes.bool,
+
+    /**
+     * The default checked state of the radio button.
+     */
+    defaultChecked: PropTypes.bool,
+
+    /**
+     * Callback function that will be invoked when the value changes.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Callback function that will be invoked when the focus is removed from radio button.
+     */
+    onBlur: PropTypes.func,
+
+    /**
+     * Callback function that will be invoked when the focus is set on radio button.
+     */
+    onFocus: PropTypes.func
+};
+
+RadioButton.defaultProps = {
+    tag: 'label',
+    disabled: false
+};
 
 export default RadioButton;

@@ -29,10 +29,6 @@ class RadioGroup extends React.Component {
         value: (this.props.value !== undefined) ? this.props.value : this.props.defaultValue
     };
 
-    get value() {
-        return this.state.value;
-    }
-
     handleChange = (event) => {
         if (this.props.value !== undefined) {
             // Controlled component
