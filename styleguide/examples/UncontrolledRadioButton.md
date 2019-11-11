@@ -1,4 +1,6 @@
 ```jsx
+const ref = React.createRef();
+
 initialState = {
     focus: 'Default'
 };
@@ -163,7 +165,7 @@ const handleFocusInOut = (focus) => (event) => {
             </Row>
             <FormGroup>
                 <Text size={20}>
-                    onFocus & onBlur
+                    Usage of onFocus & onBlur & forwardRef
                 </Text>
             </FormGroup>
             <Row>
@@ -173,6 +175,7 @@ const handleFocusInOut = (focus) => (event) => {
                             onFocus={handleFocusInOut(true)}
                             onBlur={handleFocusInOut(false)}
                             tag="div"
+                            ref={ref}
                         >
                             {({ value, checked, disabled, onChange, onFocus, onBlur }) => (
                                 <Fragment>
@@ -182,9 +185,11 @@ const handleFocusInOut = (focus) => (event) => {
                                         placeholder="Try to focus on me"
                                         onFocus={event => {
                                             onFocus(event);
+                                            ref.current.checked = true;
                                         }}
                                         onBlur={event => {
                                             onBlur(event);
+                                            ref.current.checked = false;
                                         }}
                                     />
                                 </Fragment>
