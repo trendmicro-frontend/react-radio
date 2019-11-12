@@ -48,17 +48,6 @@ Or pass tag to customize the wrapper component.
 </RadioButton>
 ```
 
-Or use render props to show the component.
-```jsx
-<RadioButton>
-    {({ value, checked, disabled, onChange }) => (
-        <span style={{ verticalAlign: 'middle', marginLeft: 8 }}>
-            This value is {value}.
-        </span>
-    )}
-</RadioButton>
-```
-
 
 #### Uncontrolled RadioButton
 
@@ -157,8 +146,6 @@ id | String | | Id for the input field of radio button.
 name | String | | Name for the input element.
 value | any | | Value for the radio button.
 onChange | Function | | Callback function that will be invoked when the value changes.
-onFocus | Function | | Callback function that will be invoked when the focus is set on radio button.
-onBlur | Function | | Callback function that will be invoked when the focus is removed from radio button.
 
 #### RadioGroup
 

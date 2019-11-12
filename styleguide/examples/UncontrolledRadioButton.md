@@ -1,18 +1,6 @@
 ```jsx
 const ref = React.createRef();
 
-initialState = {
-    focus: 'Default'
-};
-
-const handleFocusInOut = (focus) => (event) => {
-    if (focus) {
-        setState({ focus: 'Focus In' });
-    } else {
-        setState({ focus: 'Focus Out' });
-    }
-};
-
 <Container fluid>
     <Row>
         <Col>
@@ -107,12 +95,8 @@ const handleFocusInOut = (focus) => (event) => {
             </FormGroup>
             <FormGroup>
                 <RadioButton>
-                    {({ value, checked, disabled, onChange }) => (
-                        <Fragment>
-                            <span>Unchecked</span>
-                            <p style={{ marginLeft: (16 + 8) }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </Fragment>
-                    )}
+                    <span>Unchecked</span>
+                    <p style={{ marginLeft: (16 + 8) }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </RadioButton>
             </FormGroup>
             <FormGroup>
@@ -165,35 +149,21 @@ const handleFocusInOut = (focus) => (event) => {
             </Row>
             <FormGroup>
                 <Text size={20}>
-                    Usage of onFocus & onBlur & forwardRef
+                    Usage of forwardRef
                 </Text>
             </FormGroup>
             <Row>
                 <Col>
                     <FormGroup>
                         <RadioButton
-                            onFocus={handleFocusInOut(true)}
-                            onBlur={handleFocusInOut(false)}
-                            tag="div"
                             ref={ref}
+                            onChange={()=>{
+                                console.log(ref.current.checked);
+                                ref.current.checked = false;
+                                console.log(ref.current.checked);
+                            }}
                         >
-                            {({ value, checked, disabled, onChange, onFocus, onBlur }) => (
-                                <Fragment>
-                                    <span style={{ width: 120 }}>{`${state.focus}`}</span>
-                                    <Input
-                                        type="text"
-                                        placeholder="Try to focus on me"
-                                        onFocus={event => {
-                                            onFocus(event);
-                                            ref.current.checked = true;
-                                        }}
-                                        onBlur={event => {
-                                            onBlur(event);
-                                            ref.current.checked = false;
-                                        }}
-                                    />
-                                </Fragment>
-                            )}
+                            Select me, and see console
                         </RadioButton>
                     </FormGroup>
                 </Col>

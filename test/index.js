@@ -18,32 +18,40 @@ test('mount', (t) => {
 test('checked state', (t) => {
     test('RadioButton', (t) => {
         test('default state', (t) => {
-            const wrapper = mount(<RadioButton />);
-            const radioButton = wrapper.instance();
-            t.equal(radioButton.checked, false, 'the default checked state is false');
+            const radioButton = React.createRef();
+            const Component = () => (<RadioButton ref={radioButton} />);
+            mount(<Component />);
+
+            t.equal(radioButton.current.checked, false, 'the default checked state is false');
             t.end();
         });
 
         test('controlled state', (t) => {
-            const wrapper = mount(<RadioButton checked={false} />);
-            const radioButton = wrapper.instance();
-            t.equal(radioButton.checked, false, 'the checked state is initially set to false');
+            const radioButton = React.createRef();
+            const Component = ({ checked }) => (<RadioButton checked={checked} ref={radioButton} />);
+            const wrapper = mount(<Component checked={false} />);
+
+            t.equal(radioButton.current.checked, false, 'the checked state is initially set to false');
             wrapper.setProps({ checked: true });
-            t.equal(radioButton.checked, true, 'the checked state is set to true');
+            t.equal(radioButton.current.checked, true, 'the checked state is set to true');
             t.end();
         });
 
         test('props: defaultChecked', (t) => {
-            const wrapper = mount(<RadioButton defaultChecked />);
-            const radioButton = wrapper.instance();
-            t.equal(radioButton.checked, true);
+            const radioButton = React.createRef();
+            const Component = () => (<RadioButton defaultChecked ref={radioButton} />);
+            mount(<Component />);
+
+            t.equal(radioButton.current.checked, true);
             t.end();
         });
 
         test('props: checked', (t) => {
-            const wrapper = mount(<RadioButton checked />);
-            const radioButton = wrapper.instance();
-            t.equal(radioButton.checked, true);
+            const radioButton = React.createRef();
+            const Component = () => (<RadioButton checked ref={radioButton} />);
+            mount(<Component />);
+
+            t.equal(radioButton.current.checked, true);
             t.end();
         });
 
@@ -61,18 +69,6 @@ test('renders children', (t) => {
             </RadioButton>
         ));
         t.equal(wrapper.text(), 'My label', 'text should be equal to "My label"');
-        t.end();
-    });
-
-    test('RadioButton', (t) => {
-        const wrapper = mount((
-            <RadioButton>
-                {({ value, checked, disabled, onChange }) => (
-                    <p>My label</p>
-                )}
-            </RadioButton>
-        ));
-        t.ok(wrapper.contains(<p>My label</p>));
         t.end();
     });
 

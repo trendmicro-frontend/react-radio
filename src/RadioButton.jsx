@@ -20,8 +20,6 @@ const RadioButton = React.forwardRef((props, ref) => {
         value,
         tag: Tag,
         onChange = noop,
-        onBlur = noop,
-        onFocus = noop,
         checked,
         defaultChecked,
 
@@ -72,25 +70,13 @@ const RadioButton = React.forwardRef((props, ref) => {
                             checked={radioChecked}
                             defaultChecked={defaultChecked}
                             onChange={radioOnChange}
-                            onBlur={onBlur}
-                            onFocus={onFocus}
                             className={styles.inputRadio}
                         />
                         <div className={styles.controlIndicator} />
                         {
                             label ? <div className={styles.textLabel}>{label}</div> : null // deprecated
                         }
-                        {typeof children === 'function'
-                            ? children({
-                                value,
-                                checked: radioChecked,
-                                disabled: radioDisabled,
-                                onChange: radioOnChange,
-                                onBlur: onBlur,
-                                onFocus: onFocus,
-                            })
-                            : children
-                        }
+                        {children}
                     </Tag>
                 );
             }}
@@ -151,16 +137,6 @@ RadioButton.propTypes = {
      * Callback function that will be invoked when the value changes.
      */
     onChange: PropTypes.func,
-
-    /**
-     * Callback function that will be invoked when the focus is removed from radio button.
-     */
-    onBlur: PropTypes.func,
-
-    /**
-     * Callback function that will be invoked when the focus is set on radio button.
-     */
-    onFocus: PropTypes.func
 };
 
 RadioButton.defaultProps = {
