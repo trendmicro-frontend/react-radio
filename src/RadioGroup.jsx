@@ -16,15 +16,21 @@ class RadioGroup extends React.Component {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        let updatedState = {};
+        let updatedState = null;
         if (nextProps.value !== undefined && nextProps.value !== prevState.value) {
-            updatedState.value = nextProps.value;
+            updatedState = {
+                ...updatedState,
+                value: nextProps.value
+            };
         }
         if (nextProps.disabled !== undefined && nextProps.disabled !== prevState.disabled) {
-            updatedState.disabled = nextProps.disabled;
+            updatedState = {
+                ...updatedState,
+                disabled: nextProps.disabled
+            };
         }
 
-        return Object.keys(updatedState).length ? updatedState : null;
+        return updatedState;
     }
 
     handleChange = (event) => {
