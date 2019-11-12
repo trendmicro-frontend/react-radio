@@ -16,18 +16,16 @@ class RadioGroup extends React.Component {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
+        let updatedState = {};
         if (nextProps.value !== undefined && nextProps.value !== prevState.value) {
-            return {
-                value: nextProps.value,
-            };
+            updatedState.value = nextProps.value;
+        }
+        if (nextProps.disabled !== undefined && nextProps.disabled !== prevState.disabled) {
+            updatedState.disabled = nextProps.disabled;
         }
 
-        return null;
+        return Object.keys(updatedState).length ? updatedState : null;
     }
-
-    state = {
-        value: (this.props.value !== undefined) ? this.props.value : this.props.defaultValue
-    };
 
     handleChange = (event) => {
         if (this.props.value !== undefined) {
@@ -45,15 +43,15 @@ class RadioGroup extends React.Component {
         }
     };
 
+    state = {
+        value: (this.props.value !== undefined) ? this.props.value : this.props.defaultValue,
+        disabled: (this.props.disabled !== undefined) ? this.props.disabled : false,
+        onChange: this.handleChange,
+    };
+
     render() {
         return (
-            <RadioGroupContext.Provider
-                value={{
-                    disabled: this.props.disabled,
-                    value: this.state.value,
-                    onChange: this.handleChange,
-                }}
-            >
+            <RadioGroupContext.Provider value={this.state}>
                 {this.props.children}
             </RadioGroupContext.Provider>
         );
