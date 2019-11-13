@@ -18,6 +18,7 @@ class RadioGroup extends React.Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         let updatedState = null;
         if (nextProps.value !== undefined && nextProps.value !== prevState.value) {
+            // Controlled component, value is controlled by parent
             updatedState = {
                 ...updatedState,
                 value: nextProps.value
