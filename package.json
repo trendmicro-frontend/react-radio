@@ -50,7 +50,7 @@
     "radio-group"
   ],
   "peerDependencies": {
-    "react": ">=16.3.0"
+    "react": ">=16.4.0"
   },
   "dependencies": {
     "chained-function": "^0.5.0",
