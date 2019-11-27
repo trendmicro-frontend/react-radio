@@ -28,24 +28,26 @@ Demo: https://trendmicro-frontend.github.io/react-radio
 ### RadioButton
 
 ```jsx
-<RadioButton label="RadioButton label" />
+<RadioButton>RadioButton label</RadioButton>
 ```
 
-The label prop is optional, you can use children to pass through the component.
+You can use children to pass through the component.
 
 ```jsx
-<RadioButton label="RadioButton label">
-    <p style={{ marginLeft: 24 }}>
-        Lorem ipsum dolor sit amet...
-    </p>
-</RadioButton>
-
 <RadioButton>
     <span style={{ verticalAlign: 'middle', marginLeft: 8 }}>
         Lorem ipsum dolor sit amet...
     </span>
 </RadioButton>
 ```
+
+Or pass tag to customize the wrapper component.
+```jsx
+<RadioButton tag='span'>
+    Lorem ipsum dolor sit amet...
+</RadioButton>
+```
+
 
 #### Uncontrolled RadioButton
 
@@ -63,25 +65,23 @@ The label prop is optional, you can use children to pass through the component.
 
 ### RadioGroup
 
-When rendering radio buttons deeply nested inside the radio group, you need to pass a `depth` prop to limit the recursion depth.
-
 ```jsx
 <RadioGroup
     name="comic"
     value={this.state.value}
-    depth={3} // This is needed to minimize the recursion overhead
-    onChange={(value, event) => {
+    onChange={(event) => {
+        const value = event.target.value;
         this.setState({ value: value });
     }}
 >
     <div className="row">
         <div className="col-xs-12 col-sm-6">
-            <RadioButton label="Batman (DC)" value="dc:batman" />
-            <RadioButton label="Hulk (Marvel)" value="marvel:hulk" />
+            <RadioButton value="dc:batman">Batman (DC)</RadioButton>
+            <RadioButton value="marvel:hulk">Hulk (Marvel)</RadioButton>
         </div>
         <div className="col-xs-12 col-sm-6">
-            <RadioButton label="Superman (DC)" value="dc:superman" />
-            <RadioButton label="Spider-Man (Marvel)" value="marvel:spiderman" disabled />
+            <RadioButton value="dc:superman">Superman (DC)</RadioButton>
+            <RadioButton value="marvel:spiderman" disabled>Spider-Man (Marvel)</RadioButton>
         </div>
     </div>
 </RadioGroup>
@@ -95,11 +95,13 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
 <RadioGroup
     name="radiogroup"
     value={this.state.value}
-    onChange={(value, event) => {
+    onChange={(event) => {
+        const value = event.target.value;
         this.setState({ value: value });
     }}
 >
-    <RadioButton label="First option" value="one">
+    <RadioButton value="one">
+        <span>First option</span>
         <div style={{ marginLeft: 22 }}>
             <input
                 type="text"
@@ -110,7 +112,8 @@ You may need to use `event.stopPropagation()` to stop **onChange** propagation w
             />
         </div>
     </RadioButton>
-    <RadioButton label="Second option" value="two">
+    <RadioButton value="two">
+        <span>Second option</span>
         <div style={{ marginLeft: 22 }}>
             <input
                 type="text"
@@ -135,12 +138,11 @@ Name | Type | Default | Description
 children | any | | Children to pass through the component.
 className | Object | | Customized class name for the component.
 style | Object | | Customized style for the component.
-inputClassName | Object | | Customized class name for the radio button.
-inputStyle | Object | | Customized style for the radio button.
 checked | Boolean | | If true, the radio button will be selected. Transferred from the radio group.
 defaultChecked | Boolean | | The default checked state of the radio button.
 disabled | Boolean | false | If true, the radio button will be shown as disabled and cannot be modified.
-label | Node or String | | Label for the radio button.
+tag | Function or String | label | Customized wrapper component to replace label.
+id | String | | Id for the input field of radio button.
 name | String | | Name for the input element.
 value | any | | Value for the radio button.
 onChange | Function | | Callback function that will be invoked when the value changes.
@@ -155,47 +157,17 @@ name | String | | Name for the input element group.
 value | any | | The value of the radio group.
 defaultValue | any | | The default value of the radio group.
 onChange | Function | | Callback function that will be invoked when the value changes.
-depth | Number | 1 | Limits the recursion depth when rendering radio buttons deeply inside a radio group.
 
 ### Class Properties
 
 #### RadioButton
 
-Use the ref property to get a reference to this component:
+Use the ref property to get a reference to radio button:
 
 ```jsx
-<RadioButton
-    ref={node => {
-        if (node) {
-            this.radioButton = node;
-            console.log(this.radioButton.checked);
-        }
-    }}
-/>
+const ref = React.createRef();
+<RadioButton ref={ref} />
 ```
-
-Name | Type | Description
-:--- | :--- | :----------
-checked | Boolean | Get the checked state.
-
-#### RadioGroup
-
-Use the ref property to get a reference to this component:
-
-```jsx
-<RadioGroup
-    ref={node => {
-        if (node) {
-            this.radioGroup = node;
-            console.log(this.radioGroup.value);
-        }
-    }}
-/>
-```
-
-Name | Type | Description
-:--- | :--- | :----------
-value | any | Get the value of the radio group.
 
 ## License
 
